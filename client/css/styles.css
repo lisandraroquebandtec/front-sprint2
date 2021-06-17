@@ -226,6 +226,7 @@ html input {
   margin: 8px;
 }
 .main__products .products__list {
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
 }
