@@ -41,8 +41,40 @@ class ProdutoController {
         this._mensagem.texto = err;
       });
 
-    
+  }
+
+  procurar(evento) {
+    let input = evento.target.value;
+    const lista = this._listaProduto;
+
+    this._listaProduto =  new Bind(
+      new ListaProdutos(),
+      new ProdutosView(document.querySelector(".products")),
+      "adicionar"
+    )
+
+
+    if(evento.target.value === ''){
+      return this.carregaProdutos();
+    }
+    this._listaFiltrada(lista, input);
 
   }
+
+    _listaFiltrada(lista, input){
+      lista.produtos.forEach((produto) => {
+        if(this._contem(produto.descricao, input)){
+          this._listaProduto.adicionar(produto);
+        }
+      });
+    }
+
+    _caixaAlta(string){
+      return string.toUpperCase();
+    }
+
+    _contem(descricao, value){
+      return this._caixaAlta(descricao).includes(this._caixaAlta(value));
+    }
 
 }
